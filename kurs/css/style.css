@@ -142,6 +142,54 @@ h5:hover
   opacity: 0.3;
 }
 
+/*----- Videos end -----*/
+
+/*----- Log in -----*/
+
+.form-control
+{
+  border: 1px solid rgba(17,17,17,0.1);
+  border-radius: 0;
+  background-color: rgba(17,17,17,0.03);
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1;
+  color: #111;
+  transition: .2s all cubic-bezier(.4,0,.2,1);
+}
+
+  .form-control:focus
+  {
+    border-color: rgba(17,17,17,0.3);
+    color: #111;
+    background-color: rgba(17,17,17,0.03);
+    box-shadow: none;
+  }
+
+  .was-validated .form-control:invalid:focus, .was-validated .form-control:valid:focus
+  {
+    box-shadow: none;
+  }
+
+label
+{
+  font-size: 16px;
+  font-family: Lato;
+  font-weight: 400;
+  line-height: 24px;
+  color: #111111;
+  margin: 0;
+}
+
+.form-group
+{
+  margin-bottom: 24px;
+}
+
+.form-text
+{
+  font-family: Lato;
+}
 
 
 
@@ -161,7 +209,8 @@ h5:hover
 
 
 
-/* ----- Videos end ----- */
+
+
 
 
 
