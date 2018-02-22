@@ -1,0 +1,114 @@
+/* ----- Global ----- */
+
+*
+{
+  outline: 0;
+}
+
+/* ----- Global end ----- */
+
+/* ----- Header ----- */
+#main
+{
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+  #main > div.container > div.row
+  {
+    height: 80px;
+  }
+
+  #main .nav-item:hover
+  {
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    transition-duration: 0.15s;
+  }
+
+  #main .nav-link
+  {
+    padding: 10px 15px;
+    color: #000;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  #main .nav-link.active
+  {
+    color: #9b59b6;
+  }
+
+  .icons
+  {
+    color: #000;
+    cursor: pointer;
+    line-height: normal;
+  }
+
+  .icons .material-icons
+  {
+    line-height: normal;
+    color: #000;
+  }
+
+/* ----- Header end ----- */
+
+/* ----- Videos ----- */
+
+h4
+{
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+h5
+{
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----- Videos end ----- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----- Sth ----- */
