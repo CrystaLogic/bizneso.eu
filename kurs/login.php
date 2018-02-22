@@ -43,39 +43,173 @@
         </div>
       </div>
     </header>
+    <!-- Videos -->
     <section id="videos">
       <div class="container">
-        <div class="row mb-4 mt-4 pt-3">
-          <div class="col-lg-12">
+        <div class="w-100 py-4"></div>
+        <div class="row mb-4">
+          <div class="col-lg-6">
             <h4>Styczeń</h4>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3">
-            <div>
-              <img class="w-100" src="img/bg.jpg">
-            </div>
-            <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h4>
-          </div>
-          <div class="col-lg-3">
-            <div>
-              <img class="w-100" src="img/bg.jpg">
-            </div>
-            <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h4>
-          </div>
-          <div class="col-lg-3">
-            <div>
-              <img class="w-100" src="img/bg.jpg">
-            </div>
-            <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h4>
-          </div>
-          <div class="col-lg-3">
-            <div>
-              <img class="w-100" src="img/bg.jpg">
-            </div>
-            <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h4>
+          <div class="col-lg-6 d-flex justify-content-end">
+            <!--<button type="button" class="btn btn-primary">Wykup dostęp</button>-->
           </div>
         </div>
+        <div class="row mb-5 pb-5">
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-lg-6">
+            <h4>Luty</h4>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary">Wykup dostęp</button>
+          </div>
+        </div>
+        <div class="row mb-5 pb-5 nactive">
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-lg-6">
+            <h4>Marzec</h4>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary">Wykup dostęp</button>
+          </div>
+        </div>
+        <div class="row mb-5 pb-5 nactive">
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+          <div class="col-lg-3">
+            <a href="#">
+              <div class="video">
+                <img class="w-100" src="img/bg.jpg">
+                <i class="material-icons">play_arrow</i>
+              </div>
+            </a>
+            <a href="#">
+              <h5 class="text-center px-2 mt-3">Lorem ipsum dolor sit amet</h5>
+            </a>
+          </div>
+        </div>
+
       </div>
 
 
