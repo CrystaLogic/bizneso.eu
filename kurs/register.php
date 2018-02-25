@@ -50,34 +50,35 @@
         <!-- Spacer end -->
         <div class="row justify-content-center">
           <div class="col-lg-6">
-            <form class="needs-validation" action="add-user.php" method="POST" novalidate>
+            <?php if(!isset($_POST['email']) && !isset($_POST['haslo'])): ?>
+            <form class="needs-validation" action method="POST" novalidate>
               <fieldset class="form-group">
                 <label for="email">Email</label>
-                <input type="email" required class="form-control" name="email" id="email" placeholder="Enter email">
+                <input type="email" required class="form-control" name="email" id="email" pattern="[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{1,}" placeholder="Enter email">
               </fieldset>
               <fieldset class="form-group">
                 <label for="password">Hasło</label>
-                <input type="password" required class="form-control" name="password" id="password" placeholder="Hasło">
+                <input type="password" required class="form-control" name="password" id="password" pattern="[a-zA-Z\u0060\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u0030\u002D\u003D\u007E\u0021\u0040\u0023\u0024\u0025\u005E\u0026\u002A\u0028\u0029\u005F\u002B\u005B\u005D\u005C\u007B\u007D\u007C\u003B\u0027\u003A\u0022\u002C\u002E\u002F\u003C\u003E\u003F]{8,}" placeholder="Hasło">
               </fieldset>
               <fieldset class="form-group">
                 <label for="name">Imię i Nazwisko/Nazwa Firmy</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Imię i Nazwisko/Nazwa Firmy">
+                <input type="text" class="form-control" name="name" id="name" pattern="[A-Za-z0-9\/\-\u0104\u0106\u0118\u0141\u0143\u00D3\u015A\u0179\u017B\u0105\u0107\u0119\u0142\u0144\u00F3\u015B\u017A\u017C\u0020\.]{1,}" placeholder="Imię i Nazwisko/Nazwa Firmy">
                 <small class="form-text text-muted">Opcjonalne</small>
               </fieldset>
               <fieldset class="form-group">
                 <label for="address">Adres</label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="Adres">
+                <input type="text" class="form-control" name="address" id="address" pattern="[A-Za-z0-9\/\-\u0104\u0106\u0118\u0141\u0143\u00D3\u015A\u0179\u017B\u0105\u0107\u0119\u0142\u0144\u00F3\u015B\u017A\u017C\u0020\.]{1,}" placeholder="Adres">
                 <small class="form-text text-muted">Opcjonalne</small>
               </fieldset>
               <fieldset class="form-group">
                 <label for="nip">NIP (pozostaw puste jeżeli zakładasz konto dla osoby fizycznej)</label>
-                <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP">
-                <small class="form-text text-muted">Opcjonalne</small>
+                <input type="text" class="form-control" name="nip" id="nip" pattern="[0-9]{10}" placeholder="NIP">
+                <small class="form-text text-muted">Bez spacji/myślników (Opcjonalne)</small>
               </fieldset>
               <fieldset class="form-group">
                 <label for="phone">Telefon</label>
-                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Telefon">
-                <small class="form-text text-muted">Opcjonalne</small>
+                <input type="tel" class="form-control" name="phone" id="phone" pattern="[0-9]{9}" placeholder="Telefon">
+                <small class="form-text text-muted">Bez spacji/myślników (Opcjonalne)</small>
               </fieldset>
               <button type="submit" class="btn btn-primary">Zarejestruj się</button>
             </form>
@@ -106,6 +107,78 @@
               })();
 
             </script>
+            <?php else:
+
+              /* POST data */
+
+              $email = $_POST['email'];
+              $password = $_POST['password'];
+
+              $name = isset($_POST['name']) ? $_POST['name'] : '';
+              $address = isset($_POST['address']) ? $_POST['address'] : '';
+              $nip = isset($_POST['nip']) ? $_POST['nip'] : '';
+              $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+
+              /* Regex patterns */
+
+              $email_pat = "/[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{1,}/";
+              $password_pat = "/[a-zA-Z0-9~!@#\$%\^&\*\(\)_\+`\[\]\\\{\}\|;':\",\.\/<>\?]{8,}/";
+
+              $name_pat = "/[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ \/\-\.]{0,}|^$/u" ;
+              $address_pat = "/[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ \/\-\.]{0,}|^$/u" ;
+              $nip_pat = "/[0-9]{10}|^$/" ;
+              $phone_pat = "/[0-9]{9}|^$/" ;
+
+              /* Validity flag */
+
+              $valid = true ;
+
+              /* Data check */
+
+              $valid = preg_match($email_pat, $email) ? true : false;
+              $valid = preg_match($password_pat, $password) ? true : false;
+              $valid = preg_match($name_pat, $name) ? true : false;
+              $valid = preg_match($address_pat, $address) ? true : false;
+              $valid = preg_match($nip_pat, $nip) ? true : false;
+              $valid = preg_match($phone_pat, $phone) ? true : false;
+
+              if($valid)
+              {
+                error_reporting(E_ALL);
+                /* Get database settings */
+
+                $database = json_decode(file_get_contents('database.json'));
+
+                $db = new mysqli($database.host, $database.user, $database.password, $database.name) ;
+
+                $res = $db->query("SELECT * FROM test");
+
+                while ($res2 = $res->fetch_assoc()) {
+                  echo $res2["id"];
+                }
+
+
+                print_r($database) ;
+              }
+
+
+
+
+
+
+
+
+
+
+            ?>
+
+
+
+
+
+
+
+            <?php endif ?>
           </div>
         </div>
 
