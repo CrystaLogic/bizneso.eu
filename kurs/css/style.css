@@ -105,10 +105,15 @@ h5:hover
   box-shadow: 0 3px 8px 0 rgba(0,0,0,.3) ;
 }
 
-.btn-primary, .btn-primary:hover
+.btn-primary, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active
 {
   background-color: #9b59b6;
   color: #fff;
+}
+
+.btn-primary:focus, .btn-primary:not(:disabled):not(.disabled):active:focus
+{
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,.3) ;
 }
 
 .video
@@ -189,6 +194,15 @@ label
 .form-text
 {
   font-family: Lato;
+}
+
+.loginmsg
+{
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  padding: 10px 15px;
+  font-family: Montserrat;
+  font-weight: 600;
+  text-align: center;
 }
 
 

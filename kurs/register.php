@@ -1,3 +1,17 @@
+<?php
+
+  session_start();
+
+  if(isset($_SESSION['loggedin']) && isset($_SESSION['userid']))
+  {
+    if($_SESSION['loggedin'])
+    {
+      header('Location: index.php');
+      die();
+    }
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
   <head>
@@ -33,10 +47,10 @@
             </ul>
           </div>
           <div class="col-lg-1 icons d-flex align-items-center justify-content-between">
-            <a href="#">
+            <a href="settings.php">
               <i class="material-icons">settings</i>
             </a>
-            <a href="#">
+            <a href="login.php">
               <i class="material-icons">exit_to_app</i>
             </a>
           </div>
