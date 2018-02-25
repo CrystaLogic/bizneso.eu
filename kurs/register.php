@@ -170,6 +170,9 @@
 
                 $sql->close();
                 $db->close();
+
+                header('Location: login.php');
+                die();
               }
               else
               {
