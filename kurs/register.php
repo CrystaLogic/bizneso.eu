@@ -131,53 +131,51 @@
 
               /* Validity flag */
 
-              $valid = true ;
+              $valid = 0 ;
 
               /* Data check */
 
-              $valid = preg_match($email_pat, $email) ? true : false;
-              $valid = preg_match($password_pat, $password) ? true : false;
-              $valid = preg_match($name_pat, $name) ? true : false;
-              $valid = preg_match($address_pat, $address) ? true : false;
-              $valid = preg_match($nip_pat, $nip) ? true : false;
-              $valid = preg_match($phone_pat, $phone) ? true : false;
+              $valid += preg_match($email_pat, $email) ? 0 : 1;
+              $valid += preg_match($password_pat, $password) ? 0 : 2;
+              $valid += preg_match($name_pat, $name) ? 0 : 3;
+              $valid += preg_match($address_pat, $address) ? 0 : 4;
+              $valid += preg_match($nip_pat, $nip) ? 0 : 5;
+              $valid += preg_match($phone_pat, $phone) ? 0 : 6;
 
-              if($valid)
+              /* Hash password */
+
+              $password = password_hash($password, PASSWORD_DEFAULT);
+
+              if($valid == 0)
               {
-                error_reporting(E_ALL);
                 /* Get database settings */
 
                 $database = json_decode(file_get_contents('database.json'));
 
-                $db = new mysqli($database.host, $database.user, $database.password, $database.name) ;
+                /* Create connection */
 
-                $res = $db->query("SELECT * FROM test");
+                $db = new mysqli($database->host, $database->user, $database->password, $database->name) ;
+                $db->set_charset('utf8');
 
-                while ($res2 = $res->fetch_assoc()) {
-                  echo $res2["id"];
+                if($db->connect_error)
+                {
+                  die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
                 }
 
+                /* Insert data */
 
-                print_r($database) ;
+                $sql = $db->prepare("INSERT INTO users (email,password,name,address,nip,phone) VALUES (?,?,?,?,?,?)");
+                $sql->bind_param('ssssdd', $email, $password, $name, $address, $nip, $phone);
+                $sql->execute();
+
+                $sql->close();
+                $db->close();
               }
-
-
-
-
-
-
-
-
-
-
+              else
+              {
+                echo 'Validation error, javascript disabled ('.$valid.')';
+              }
             ?>
-
-
-
-
-
-
-
             <?php endif ?>
           </div>
         </div>
