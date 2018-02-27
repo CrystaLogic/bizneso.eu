@@ -25,7 +25,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-2">
-            <img class="w-100" src="img/logo.png" alt="bizneso.eu">
+            <a href="index.php"><img class="w-100" src="img/logo.png" alt="bizneso.eu"></a>
           </div>
           <div class="col-lg-9">
             <ul class="nav justify-content-end">
@@ -102,13 +102,13 @@
               {
                 echo '
                 <div class="col-lg-3">
-                  <a href="#">
+                  <a href="video.php?v='.$videos['id'][$i].'">
                     <div class="video">
                       <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
                       <i class="material-icons">play_arrow</i>
                     </div>
                   </a>
-                  <a href="#">
+                  <a href="video.php?v='.$videos['id'][$i].'">
                     <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
                   </a>
                 </div>';
@@ -125,13 +125,13 @@
                 <div class="row mb-5 pb-5">';
                 echo '
                 <div class="col-lg-3">
-                  <a href="#">
+                  <a href="video.php?v='.$videos['id'][$i].'">
                     <div class="video">
                       <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
                       <i class="material-icons">play_arrow</i>
                     </div>
                   </a>
-                  <a href="#">
+                  <a href="video.php?v='.$videos['id'][$i].'">
                     <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
                   </a>
                 </div>';
@@ -148,13 +148,13 @@
               <div class="row mb-5 pb-5">';
               echo '
               <div class="col-lg-3">
-                <a href="#">
+                <a href="video.php?v='.$videos['id'][$i].'">
                   <div class="video">
                     <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
                     <i class="material-icons">play_arrow</i>
                   </div>
                 </a>
-                <a href="#">
+                <a href="video.php?v='.$videos['id'][$i].'">
                   <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
                 </a>
               </div>';

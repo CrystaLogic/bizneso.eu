@@ -25,7 +25,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-2">
-            <img class="w-100" src="img/logo.png" alt="bizneso.eu">
+            <a href="index.php"><img class="w-100" src="img/logo.png" alt="bizneso.eu"></a>
           </div>
           <div class="col-lg-9">
             <ul class="nav justify-content-end">
