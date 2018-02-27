@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat:600,700&amp;subset=latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
   </head>
   <body>
     <header id="main">
@@ -65,10 +66,11 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <?php if(!isset($_POST['email']) && !isset($_POST['haslo'])): ?>
-            <form class="needs-validation" action method="POST" novalidate>
+            <form id="register" class="needs-validation" action method="POST" novalidate>
               <fieldset class="form-group">
                 <label for="email">Email</label>
                 <input type="email" required class="form-control" name="email" id="email" pattern="[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{1,}" placeholder="Enter email">
+                <small id="email_message" class="form-text text-muted"></small>
               </fieldset>
               <fieldset class="form-group">
                 <label for="password">Hasło</label>
@@ -94,7 +96,8 @@
                 <input type="tel" class="form-control" name="phone" id="phone" pattern="[0-9]{9}" placeholder="Telefon">
                 <small class="form-text text-muted">Bez spacji/myślników (Opcjonalne)</small>
               </fieldset>
-              <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+              <button id="sub" type="button" class="btn btn-primary">Zarejestruj się</button>
+              <button id="sub2" type="submit" class="d-none btn btn-primary">Zarejestruj się</button>
             </form>
             <script>
 
@@ -117,6 +120,36 @@
                       form.classList.add('was-validated');
                     }, false);
                   });
+
+                  /*$(function()
+                  {*/
+                    $('#sub').on('click', function()
+                    {
+                      $.ajax(
+                      {
+                        url: 'check-name.php',
+                        type: 'POST',
+                        data:
+                        {
+                          name: $('#email').val()
+                        },
+                        success: function(res)
+                        {
+                          if(res == 'avabile')
+                          {
+                            $('#sub2').click();
+                          }
+                          else
+                          {
+                            $('#email_message').html('Taki email znajduje się już w bazie danych');
+                          }
+                        }
+                      });
+                    });
+                  /*});*/
+
+
+
                 }, false);
               })();
 
@@ -176,17 +209,33 @@
                   die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
                 }
 
-                /* Insert data */
+                /* Check for existing email */
 
-                $sql = $db->prepare("INSERT INTO users (email,password,name,address,nip,phone) VALUES (?,?,?,?,?,?)");
-                $sql->bind_param('ssssdd', $email, $password, $name, $address, $nip, $phone);
+                $sql = $db->prepare("SELECT id FROM users WHERE email=?");
+                $sql->bind_param('s', $email);
                 $sql->execute();
 
-                $sql->close();
-                $db->close();
+                $res = $sql->get_result();
+                $ass = $res->fetch_assoc();
 
-                header('Location: login.php');
-                die();
+                if(count($ass) == 0)
+                {
+                  /* Insert data */
+
+                  $sql = $db->prepare("INSERT INTO users (email,password,name,address,nip,phone) VALUES (?,?,?,?,?,?)");
+                  $sql->bind_param('ssssdd', $email, $password, $name, $address, $nip, $phone);
+                  $sql->execute();
+
+                  $sql->close();
+                  $db->close();
+
+                  header('Location: login.php');
+                  die();
+                }
+                else
+                {
+                  echo 'Validation error, javascript disabled ('.$valid.')';
+                }
               }
               else
               {
@@ -198,7 +247,6 @@
         </div>
       </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
