@@ -101,17 +101,35 @@
               if($videos['week'][$i-1] == $videos['week'][$i])
               {
                 echo '
-                <div class="col-lg-3">
-                  <a href="video.php?v='.$videos['id'][$i].'">
-                    <div class="video">
-                      <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
-                      <i class="material-icons">play_arrow</i>
-                    </div>
-                  </a>
-                  <a href="video.php?v='.$videos['id'][$i].'">
-                    <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
-                  </a>
-                </div>';
+                <div class="col-lg-3">';
+                if($_SESSION['admin'])
+                {
+                  echo
+                    '<a href="edit.php?v='.$videos['id'][$i].'">
+                      <div class="video">
+                        <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
+                        <i class="material-icons">play_arrow</i>
+                      </div>
+                    </a>
+                    <a href="edit.php?v='.$videos['id'][$i].'">
+                      <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
+                    </a>
+                  </div>';
+                }
+                else
+                {
+                  echo
+                    '<a href="video.php?v='.$videos['id'][$i].'">
+                      <div class="video">
+                        <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
+                        <i class="material-icons">play_arrow</i>
+                      </div>
+                    </a>
+                    <a href="video.php?v='.$videos['id'][$i].'">
+                      <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
+                    </a>
+                  </div>';
+                }
               }
               else
               {
@@ -124,8 +142,69 @@
                 </div>
                 <div class="row mb-5 pb-5">';
                 echo '
-                <div class="col-lg-3">
-                  <a href="video.php?v='.$videos['id'][$i].'">
+                <div class="col-lg-3">';
+
+                if($_SESSION['admin'])
+                {
+                  echo
+                    '<a href="edit.php?v='.$videos['id'][$i].'">
+                      <div class="video">
+                        <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
+                        <i class="material-icons">play_arrow</i>
+                      </div>
+                    </a>
+                    <a href="edit.php?v='.$videos['id'][$i].'">
+                      <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
+                    </a>
+                  </div>';
+                }
+                else
+                {
+                  echo
+                    '<a href="video.php?v='.$videos['id'][$i].'">
+                      <div class="video">
+                        <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
+                        <i class="material-icons">play_arrow</i>
+                      </div>
+                    </a>
+                    <a href="video.php?v='.$videos['id'][$i].'">
+                      <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
+                    </a>
+                  </div>';
+                }
+              }
+            }
+            else
+            {
+              echo '
+              
+              <div class="row mb-4">
+                <div class="col-lg-6">
+                  <h4>'.$videos['week'][$i].'</h4>
+                </div>
+              </div>
+              <div class="row mb-5 pb-5">';
+              echo '
+              <div class="col-lg-3">';
+
+              if($_SESSION['admin'])
+              {
+                echo
+                  '<a href="edit.php?v='.$videos['id'][$i].'">
+                    <div class="video">
+                      <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
+                      <i class="material-icons">play_arrow</i>
+                    </div>
+                  </a>
+                  <a href="edit.php?v='.$videos['id'][$i].'">
+                    <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
+                  </a>
+                </div>';
+              }
+              else
+              {
+                echo
+                  '<a href="video.php?v='.$videos['id'][$i].'">
                     <div class="video">
                       <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
                       <i class="material-icons">play_arrow</i>
@@ -136,28 +215,6 @@
                   </a>
                 </div>';
               }
-            }
-            else
-            {
-              echo '
-              <div class="row mb-4">
-                <div class="col-lg-6">
-                  <h4>'.$videos['week'][$i].'</h4>
-                </div>
-              </div>
-              <div class="row mb-5 pb-5">';
-              echo '
-              <div class="col-lg-3">
-                <a href="video.php?v='.$videos['id'][$i].'">
-                  <div class="video">
-                    <img class="w-100" src="https://img.youtube.com/vi/'.$videos['video'][$i].'/0.jpg">
-                    <i class="material-icons">play_arrow</i>
-                  </div>
-                </a>
-                <a href="video.php?v='.$videos['id'][$i].'">
-                  <h5 class="text-center px-2 mt-3">'.$videos['name'][$i].'</h5>
-                </a>
-              </div>';
             }
           }
 

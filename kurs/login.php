@@ -159,6 +159,7 @@
                     session_start();
                     $_SESSION['loggedin'] = true;
                     $_SESSION['userid'] = $id;
+                    $_SESSION['admin'] = false;
 
                     $sql->close();
                     $db->close();

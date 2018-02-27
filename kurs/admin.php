@@ -2,10 +2,13 @@
 
   session_start();
 
-  if(!isset($_SESSION['loggedin']))
+  if(isset($_SESSION['loggedin']) && isset($_SESSION['userid']))
   {
-    header('Location: login.php');
-    die();
+    if($_SESSION['loggedin'])
+    {
+      header('Location: index.php');
+      die();
+    }
   }
 
 ?>
@@ -54,74 +57,45 @@
         </div>
       </div>
     </header>
-    <!-- Videos -->
-    <section id="videos">
+    <section id="login">
       <div class="container">
         <!-- Spacer -->
         <div class="w-100 py-4"></div>
         <!-- Spacer end -->
-        <?php
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <?php if(!isset($_POST['password'])): ?>
+            <form action method="POST" novalidate>
+              <fieldset class="form-group">
+                <label for="password">Hasło</label>
+                <input type="password" required class="form-control" name="password" id="password" placeholder="Hasło">
+              </fieldset>
+              <button type="submit" class="btn btn-primary">Zaloguj się</button>
+            </form>
+            <?php else:
 
-          /* Get database settings */
+              /* POST data */
 
-          $database = json_decode(file_get_contents('database.json'));
+              $password = $_POST['password'];
 
-          /* Create connection */
+              /* Check password */
 
-          $db = new mysqli($database->host, $database->user, $database->password, $database->name) ;
-          $db->set_charset('utf8');
+              if($password == 'haslo123')
+              {
+                session_start();
+                $_SESSION['admin'] = true;
+                $_SESSION['loggedin'] = true;
+                $_SESSION['userid'] = 0;
+                header('Location: index.php');
+                die();
+              }
+              else
+              {
+                echo '<div class="loginmsg">Błędne dane logowania. Spróbuj ponownie</div>' ;
+              }
 
-          if($db->connect_error)
-          {
-            die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
-          }
-
-          /* Get data */
-
-          $id = $_GET['v'] ;
-
-          if(!preg_match("/^[0-9]{1,}$/", $id))
-          {
-            header('Location: index.php');
-            die();
-          }
-
-          $sql = $db->prepare("SELECT * FROM videos WHERE id=?");
-          $sql->bind_param('d', $id);
-          $sql->execute();
-          $res = $sql->get_result();
-          $ass = $res->fetch_assoc();
-
-          if(count($ass) == 0)
-          {
-            header('Location: index.php');
-            die();
-          }
-
-          $name = $ass['name'];
-          $video = $ass['video'];
-          $content = $ass['content'];
-
-          $sql->close();
-          $db->close();
-
-        ?>
-        <div class="row mb-4">
-          <div class="col-lg-12">
-            <h4>Styczeń</h4>
-          </div>
-        </div>
-        <div class="row pb-3 justify-content-center">
-          <div class="col-lg-8">
-            <iframe id="ytplayer" class="w-100" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/<?php echo $video; ?>?autoplay=0&origin=http://example.com" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <h5 class="my-3"><?php echo $name; ?></h5>
-          </div>
-          <div class="col-lg-12">
-            <?php echo $content; ?>
+            ?>
+            <?php endif ?>
           </div>
         </div>
       </div>
