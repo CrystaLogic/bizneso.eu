@@ -29,7 +29,59 @@
           </div>
           <div class="col-lg-9">
             <ul class="nav justify-content-end">
-              <li class="nav-item">
+              <?php
+
+
+                  /* Get database settings */
+
+                  $database = json_decode(file_get_contents('database.json'));
+
+                  /* Create connection */
+
+                  $db = new mysqli($database->host, $database->user, $database->password, $database->name) ;
+                  $db->set_charset('utf8');
+
+                  if($db->connect_error)
+                  {
+                    die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
+                  }
+
+                  /* Get data */
+
+                  $sql = $db->prepare("SELECT week FROM videos WHERE id NOT IN (SELECT video_id FROM access WHERE user_id=?) GROUP BY week");
+                  $sql->bind_param('d', $_SESSION['userid']);
+                  $sql->execute();
+                  $res = $sql->get_result();
+
+                  while($ass = $res->fetch_assoc())
+                  {
+                    echo '
+                    <li class="nav-item">
+                      <a class="nav-link active" href="buy.php?w='.$ass['week'].'">'.$ass['week'].'</a>
+                    </li>
+                    ';
+                  }
+
+                  $sql->close();
+                  $db->close();
+
+
+              ?>
+              <?php
+
+                if(isset($_SESSION['admin']))
+                {
+                  if($_SESSION['admin'])
+                  {
+                    echo '
+                    <li class="nav-item">
+                      <a class="nav-link" href="new.php">Dodaj film</a>
+                    </li>';
+                  }
+                }
+
+              ?>
+              <!--<li class="nav-item">
                 <a class="nav-link active" href="#">Tydzień 1</a>
               </li>
               <li class="nav-item">
@@ -40,7 +92,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Tydzień 4</a>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="col-lg-1 icons d-flex align-items-center justify-content-between">
@@ -82,6 +134,19 @@
           $sql->bind_param('d', $_SESSION['userid']);
           $sql->execute();
           $res = $sql->get_result();
+
+          if(isset($_SESSION['admin']))
+          {
+            if($_SESSION['admin'])
+            {
+              unset($sql);
+              unset($res);
+
+              $sql = $db->prepare("SELECT * FROM videos");
+              $sql->execute();
+              $res = $sql->get_result();
+            }
+          }
 
           $count=0;
 
@@ -177,7 +242,7 @@
             else
             {
               echo '
-              
+
               <div class="row mb-4">
                 <div class="col-lg-6">
                   <h4>'.$videos['week'][$i].'</h4>
