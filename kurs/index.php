@@ -31,7 +31,8 @@
             <ul class="nav justify-content-end">
               <?php
 
-
+                if(!$_SESSION['admin'])
+                {
                   /* Get database settings */
 
                   $database = json_decode(file_get_contents('database.json'));
@@ -64,7 +65,7 @@
 
                   $sql->close();
                   $db->close();
-
+                }
 
               ?>
               <?php
@@ -81,18 +82,6 @@
                 }
 
               ?>
-              <!--<li class="nav-item">
-                <a class="nav-link active" href="#">Tydzień 1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Tydzień 2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Tydzień 3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Tydzień 4</a>
-              </li>-->
             </ul>
           </div>
           <div class="col-lg-1 icons d-flex align-items-center justify-content-between">
@@ -142,7 +131,7 @@
               unset($sql);
               unset($res);
 
-              $sql = $db->prepare("SELECT * FROM videos");
+              $sql = $db->prepare("SELECT * FROM videos ORDER BY week, id");
               $sql->execute();
               $res = $sql->get_result();
             }
