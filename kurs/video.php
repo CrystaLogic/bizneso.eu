@@ -24,11 +24,11 @@
     <header id="main">
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-lg-2">
+          <div class="col-lg-2 col-md-2 col-sm-4 col-6 mx-auto py-3">
             <a href="index.php"><img class="w-100" src="img/logo.png" alt="bizneso.eu"></a>
           </div>
-          <div class="col-lg-9">
-            <ul class="nav justify-content-end">
+          <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+            <ul class="nav justify-content-center">
               <li class="nav-item">
                 <a class="nav-link active" href="#">Tydzień 1</a>
               </li>
@@ -43,7 +43,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-1 icons d-flex align-items-center justify-content-between">
+          <div class="col-lg-1 col-md-1 col-sm-3 col-4 mx-auto py-3 icons d-flex align-items-center justify-content-between">
             <a href="settings.php">
               <i class="material-icons">settings</i>
             </a>

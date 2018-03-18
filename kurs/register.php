@@ -96,6 +96,10 @@
                 <input type="tel" class="form-control" name="phone" id="phone" pattern="[0-9]{9}" placeholder="Telefon">
                 <small class="form-text text-muted">Bez spacji/myślników (Opcjonalne)</small>
               </fieldset>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" checked disabled id="reg">
+                <label class="form-check-label" for="reg">Akceptuję regulamin i Politykę Prywatności</label>
+              </div>
               <button id="sub" type="button" class="btn btn-primary">Zarejestruj się</button>
               <button id="sub2" type="submit" class="d-none btn btn-primary">Zarejestruj się</button>
             </form>

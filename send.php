@@ -53,7 +53,7 @@
   $message .= '</tr>';
   $message .= '<tr>';
   $message .= '<td width="183px" style="font-weight:bold;display:block">Details:</td>';
-  $message .= '<td style="line-height:24px">' . htmlentities($details) . '</td>';
+  $message .= '<td style="line-height:24px"></td>';
   $message .= '</tr>';
   $message .= '<tr>';
   $message .= '<td colspan="2" width="183px" style="display:block">Regards,</td>';
@@ -72,7 +72,7 @@
   if (filter_var($email, FILTER_VALIDATE_EMAIL))
   {
     mail($email, $subject, $message, $headers);
-    echo "<div class='success'><div class='text-msg'>Wiadomość wysłana!</div></div>";
+    echo "<div class='success'><div class='text-msg'>Dziękuję za zapis na darmowy webinar pełen marketingu i biznesu! Za moment otrzymasz e-mail z linkiem do webinaru z informacją o jego terminie.<br><br>Ilość miejsc jest ograniczona, dlatego proszę Cię bądź kilka minut wcześniej.</div></div>";
   }
   else
   {

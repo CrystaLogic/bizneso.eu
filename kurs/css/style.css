@@ -10,6 +10,11 @@ a:hover
   text-decoration: none;
 }
 
+section
+{
+  padding-bottom: 16px;
+}
+
 /* ----- Global end ----- */
 
 /* ----- Header ----- */
@@ -20,7 +25,7 @@ a:hover
 
   #main > div.container > div.row
   {
-    height: 80px;
+    min-height: 80px;
   }
 
   #main .nav-item

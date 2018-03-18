@@ -64,20 +64,14 @@
         <!-- Spacer end -->
         <div class="row justify-content-center">
           <div class="col-lg-6">
-            <?php if(!isset($_POST['email']) && !isset($_POST['haslo'])): ?>
+            <?php if(isset($_GET['h']) && !isset($_POST['password'])): ?>
             <form class="needs-validation" action method="POST" novalidate>
               <fieldset class="form-group">
-                <label for="email">Email</label>
-                <input type="email" required class="form-control" name="email" id="email" pattern="[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{1,}" placeholder="Enter email">
-              </fieldset>
-              <fieldset class="form-group">
                 <label for="password">Hasło</label>
-                <input type="password" required class="form-control" name="password" id="password" pattern="[a-zA-Z\u0060\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u0030\u002D\u003D\u007E\u0021\u0040\u0023\u0024\u0025\u005E\u0026\u002A\u0028\u0029\u005F\u002B\u005B\u005D\u005C\u007B\u007D\u007C\u003B\u0027\u003A\u0022\u002C\u002E\u002F\u003C\u003E\u003F]{8,}" placeholder="Hasło">
-                <small class="text-muted">
-                  <a href="reset.php">Zapomniałem/am hasła</a>
-                </small>
+                <input type="password" required class="form-control" name="password" id="password" pattern="[a-zA-Z\u0060\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u0030\u002D\u003D\u007E\u0021\u0040\u0023\u0024\u0025\u005E\u0026\u002A\u0028\u0029\u005F\u002B\u005B\u005D\u005C\u007B\u007D\u007C\u003B\u0027\u003A\u0022\u002C\u002E\u002F\u003C\u003E\u003F]{8,}" placeholder="Nowe hasło">
+                <input type="hidden" required class="form-control" name="token" id="token" value="<?php echo $_GET['h']; ?>">
               </fieldset>
-              <button type="submit" class="btn btn-primary">Zaloguj się</button>
+              <button type="submit" class="btn btn-primary">Wyślij</button>
             </form>
             <script>
 
@@ -108,12 +102,11 @@
 
               /* POST data */
 
-              $email = $_POST['email'];
               $password = $_POST['password'];
+              $token = $_POST['token'];
 
               /* Regex patterns */
 
-              $email_pat = "/[a-zA-Z0-9.\-_]+@[a-zA-Z0-9\-.]+\.[a-zA-Z]{1,}/";
               $password_pat = "/[a-zA-Z0-9~!@#\$%\^&\*\(\)_\+`\[\]\\\{\}\|;':\",\.\/<>\?]{8,}/";
 
               /* Validity flag */
@@ -122,7 +115,6 @@
 
               /* Data check */
 
-              $valid += preg_match($email_pat, $email) ? 0 : 1;
               $valid += preg_match($password_pat, $password) ? 0 : 2;
 
               if($valid == 0)
@@ -143,45 +135,35 @@
 
                 /* Get data */
 
-                $sql = $db->prepare("SELECT id, email, password FROM users WHERE email=?");
-                $sql->bind_param('s', $email);
+                $sql = $db->prepare("SELECT * FROM hashes WHERE token=?");
+                $sql->bind_param('s', $token);
                 $sql->execute();
-                $sql->bind_result($id, $email, $pass);
+                $res = $sql->get_result();
+                $ass = $res->fetch_assoc();
 
-                $result = array() ;
+                $x = $password;
 
-                while($sql->fetch())
+                $password = password_hash($password, PASSWORD_DEFAULT);
+
+                if(isset($ass['user_id']))
                 {
-                  $result[] = $id."|".$email."|".$pass;
-                }
+                  $sql = $db->prepare("UPDATE users SET password=? WHERE id=?");
+                  $sql->bind_param('sd', $password, $ass['user_id']);
+                  $sql->execute();
 
-                if(count($result) == 1)
-                {
-                  if(password_verify($password, $pass))
-                  {
-                    session_start();
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['userid'] = $id;
-                    $_SESSION['admin'] = false;
-
-                    $sql->close();
-                    $db->close();
-
-                    header('Location: index.php');
-                    die();
-                  }
-                  else
-                  {
-                    echo '<div class="loginmsg">Błędne dane logowania. Spróbuj ponownie</div>' ;
-                  }
+                  $sql = $db->prepare("DELETE FROM hashes WHERE user_id=?");
+                  $sql->bind_param('d', $ass['user_id']);
+                  $sql->execute();
                 }
                 else
                 {
-                  echo '<div class="loginmsg">Błędne dane logowania. Spróbuj ponownie</div>' ;
+                  echo '<div class="loginmsg">Błędne dane. Spróbuj ponownie</div>' ;
                 }
 
                 $sql->close();
                 $db->close();
+
+                header('Location: login.php');
               }
               else
               {
