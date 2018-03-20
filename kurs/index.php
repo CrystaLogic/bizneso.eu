@@ -239,8 +239,12 @@
           $sql->close();
           $db->close();
 
+          if($count != 0)
+          {
+            echo '</div>';
+          }
+
         ?>
-        </div>
         <!--<div class="row mb-4">
           <div class="col-lg-6">
             <h4>Styczeń</h4>
