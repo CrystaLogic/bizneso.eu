@@ -339,6 +339,11 @@ body
 	-o-transform: translateY(-50%);
 }
 
+.success .text-msg small
+{
+	font-size: 75%;
+}
+
 .error-msg
 {
 	background:#c40000;
@@ -1234,4 +1239,11 @@ margin-bottom: 20px;
 #home .navi li
 {
 	align-self: flex-start;
+}
+
+.mx-auto
+{
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
 }

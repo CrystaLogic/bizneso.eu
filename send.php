@@ -72,7 +72,7 @@
   if (filter_var($email, FILTER_VALIDATE_EMAIL))
   {
     mail($email, $subject, $message, $headers);
-    echo "<div class='success'><div class='text-msg'>Dziękuję za zapis na darmowy webinar pełen marketingu i biznesu! Za moment otrzymasz e-mail z linkiem do webinaru z informacją o jego terminie.<br><br>Ilość miejsc jest ograniczona, dlatego proszę Cię bądź kilka minut wcześniej.</div></div>";
+    echo "<div class='success'><div class='text-msg'>Dziękuję za zapis na darmowy webinar pełen marketingu i biznesu! Za moment otrzymasz e-mail z linkiem do webinaru z informacją o jego terminie.<br><br>Ilość miejsc jest ograniczona, dlatego proszę Cię bądź kilka minut wcześniej.<br><small>PS: Jeśli nie otrzymałeś/aś maila poszukaj w spamie albo skontaktuj się ze mną</small></div></div>";
   }
   else
   {

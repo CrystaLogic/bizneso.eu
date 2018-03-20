@@ -210,6 +210,11 @@ label
   text-align: center;
 }
 
+.disabled
+{
+  opacity: 0.3;
+}
+
 
 
 

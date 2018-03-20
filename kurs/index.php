@@ -31,45 +31,6 @@
             <ul class="nav justify-content-center">
               <?php
 
-                if(!$_SESSION['admin'])
-                {
-                  /* Get database settings */
-
-                  $database = json_decode(file_get_contents('database.json'));
-
-                  /* Create connection */
-
-                  $db = new mysqli($database->host, $database->user, $database->password, $database->name) ;
-                  $db->set_charset('utf8');
-
-                  if($db->connect_error)
-                  {
-                    die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
-                  }
-
-                  /* Get data */
-
-                  $sql = $db->prepare("SELECT week FROM videos WHERE id NOT IN (SELECT video_id FROM access WHERE user_id=?) GROUP BY week");
-                  $sql->bind_param('d', $_SESSION['userid']);
-                  $sql->execute();
-                  $res = $sql->get_result();
-
-                  while($ass = $res->fetch_assoc())
-                  {
-                    echo '
-                    <li class="nav-item">
-                      <a class="nav-link active" href="buy.php?w='.$ass['week'].'">'.$ass['week'].'</a>
-                    </li>
-                    ';
-                  }
-
-                  $sql->close();
-                  $db->close();
-                }
-
-              ?>
-              <?php
-
                 if(isset($_SESSION['admin']))
                 {
                   if($_SESSION['admin'])
@@ -334,6 +295,80 @@
             </a>
           </div>
         </div>-->
+        <?php
+
+          if(!$_SESSION['admin'])
+          {
+            /* Get database settings */
+
+            $database = json_decode(file_get_contents('database.json'));
+
+            /* Create connection */
+
+            $db = new mysqli($database->host, $database->user, $database->password, $database->name) ;
+            $db->set_charset('utf8');
+
+            if($db->connect_error)
+            {
+              die('Wystąpił błąd bazy danych ('.$db->connect_error.')');
+            }
+
+            /* Get data */
+
+            $sql = $db->prepare("SELECT week FROM videos WHERE id NOT IN (SELECT video_id FROM access WHERE user_id=?) GROUP BY week");
+            $sql->bind_param('d', $_SESSION['userid']);
+            $sql->execute();
+            $res = $sql->get_result();
+
+            while($ass = $res->fetch_assoc())
+            {
+              echo '
+              <div class="row mb-4">
+                <div class="col-lg-6">
+                  <h4>'.$ass['week'].'</h4>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-end">
+                  <a href="buy.php?w='.$ass['week'].'"><button type="button" class="btn btn-primary">Wykup dostęp</button></a>
+                </div>
+              </div>
+              <div class="row mb-5 pb-5 disabled">';
+
+              $sql2 = $db->prepare("SELECT * FROM videos WHERE week=?");
+              $sql2->bind_param('s', $ass['week']);
+              $sql2->execute();
+              $res2 = $sql2->get_result();
+
+              while($ass2 = $res2->fetch_assoc())
+              {
+                echo '
+                <div class="col-lg-3">
+                  <a>
+                    <div class="video">
+                      <img class="w-100" src="https://img.youtube.com/vi/'.$ass2['video'].'/0.jpg">
+                      <i class="material-icons">play_arrow</i>
+                    </div>
+                  </a>
+                  <a>
+                    <h5 class="text-center px-2 mt-3">'.$ass2['name'].'</h5>
+                  </a>
+                </div>';
+              }
+
+              echo '</div>';
+
+              /*echo '
+              <li class="nav-item">
+                <a class="nav-link active" href="buy.php?w='.$ass['week'].'">'.$ass['week'].'</a>
+              </li>
+              ';*/
+            }
+
+            $sql->close();
+            $sql2->close();
+            $db->close();
+          }
+
+        ?>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

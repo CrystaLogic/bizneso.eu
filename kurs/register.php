@@ -75,6 +75,7 @@
               <fieldset class="form-group">
                 <label for="password">Hasło</label>
                 <input type="password" required class="form-control" name="password" id="password" pattern="[a-zA-Z\u0060\u0031\u0032\u0033\u0034\u0035\u0036\u0037\u0038\u0039\u0030\u002D\u003D\u007E\u0021\u0040\u0023\u0024\u0025\u005E\u0026\u002A\u0028\u0029\u005F\u002B\u005B\u005D\u005C\u007B\u007D\u007C\u003B\u0027\u003A\u0022\u002C\u002E\u002F\u003C\u003E\u003F]{8,}" placeholder="Hasło">
+                <small class="form-text text-muted">Minimum 8 znaków</small>
               </fieldset>
               <fieldset class="form-group">
                 <label for="name">Imię i Nazwisko/Nazwa Firmy</label>
@@ -98,7 +99,7 @@
               </fieldset>
               <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" checked disabled id="reg">
-                <label class="form-check-label" for="reg">Akceptuję regulamin i Politykę Prywatności</label>
+                <label class="form-check-label" for="reg">Akceptuję <a href="../regulamin.html">Regulamin</a> i <a href="../polityka-prywatnosci.html">Politykę Prywatności</a></label>
               </div>
               <button id="sub" type="button" class="btn btn-primary">Zarejestruj się</button>
               <button id="sub2" type="submit" class="d-none btn btn-primary">Zarejestruj się</button>
