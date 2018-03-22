@@ -21,6 +21,14 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.12';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <header id="main">
       <div class="container">
         <div class="row align-items-center">
@@ -62,6 +70,12 @@
     <!-- Videos -->
     <section id="videos">
       <div class="container">
+        <div class="row mb-3 pt-5">
+          <div class="col-lg-3 mx-auto">
+            <iframe class="w-100" height="200" src="https://www.youtube.com/embed/L1uuEv-GaJc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <h5 class="text-center px-2 mt-3">Film wprowadzający</h5>
+          </div>
+        </div>
         <!-- Spacer -->
         <div class="w-100 py-4"></div>
         <!-- Spacer end -->
@@ -373,6 +387,28 @@
           }
 
         ?>
+      </div>
+    </section>
+    <section id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mx-auto d-flex justify-content-center">
+            <div class="fb-page" data-href="https://web.facebook.com/Tissu-design-244543962700930/" data-tabs="timeline" data-width="500" data-height="250" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="text-center">
+          <ul class="nav justify-content-center mt-3">
+            <li class="nav-item"><a class="nav-link active" href="https://facebook.com">Grupa FB</a></li>
+            <li class="nav-item"><a class="nav-link active" href="../program-indywidualny.html">Oferta Specjalna</a></li>
+            <li class="nav-item"><a class="nav-link" href="../regulamin.html">Regulamin</a></li>
+            <li class="nav-item"><a class="nav-link" href="../polityka-prywatnosci.html">Polityka Prywatności</a></li>
+            <li class="nav-item"><a class="nav-link" href="../platnosci.html">Płatności</a></li>
+            <li class="nav-item"><a class="nav-link" href="../index.html#contact">Wsparcie</a></li>
+          </ul>
+        </div>
+        <div class="copyright">Copyright © 2018 bizneso.eu - biznes i marketing</div>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

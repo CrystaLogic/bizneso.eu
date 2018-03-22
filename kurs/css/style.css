@@ -215,6 +215,24 @@ label
   opacity: 0.3;
 }
 
+.copyright
+{
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}
+
+#footer .nav-link, #footer .nav-link:hover
+{
+  font-size: 16px;
+  color: #777;
+}
+
+#footer .nav-link.active, #footer .nav-link.active:hover
+{
+  color: #444;
+}
+
 
 
 
