@@ -1247,3 +1247,8 @@ margin-bottom: 20px;
 	margin-right: auto;
 	float: none;
 }
+
+.footer-nav ul
+{
+	padding-bottom: 16px;
+}
